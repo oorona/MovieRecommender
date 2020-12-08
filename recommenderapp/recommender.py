@@ -1,66 +1,20 @@
-from random import randrange
+import json
 
+import pandas as pd
 
-movies = [
-    {
-        'title':"Toy Story",
-        'year':"1995",
-        'filename':"images/movies/1.jpg"
-    },
-    {
-        'title':"Jumanji",
-        'year':"1995",
-        'filename': "images/movies/2.jpg"
-    },
-    {
-        'title':"Gumpy Old Men",
-        'year':"1995",
-        'filename': "images/movies/3.jpg"
-    },
-    {
-        'title':"Waiting to Exhale",
-        'year':"1995",
-        'filename': "images/movies/4.jpg"
-    },
-    {
-        'title':"Father of the Bride Part II",
-        'year':"1995",
-        'filename': "images/movies/5.jpg"
-    },
-    {
-        'title':"Heat",
-        'year':"1995",
-        'filename': "images/movies/6.jpg"
-    },
-    {
-        'title':"Sabrina",
-        'year':"1995",
-        'filename': "images/movies/7.jpg"
-    },
-    {
-        'title':"Tom and Huck",
-        'year':"1995",
-        'filename': "images/movies/8.jpg"
-    },
-    {
-        'title':"Sudden Death",
-        'year':"1995",
-        'filename': "images/movies/9.jpg"
-    },
-    {
-        'title':"GoldenEye",
-        'year':"1995",
-        'filename': "images/movies/10.jpg"
-    },
-    {
-        'title':"American President, The",
-        'year':"1995",
-        'filename': "images/movies/11.jpg"
-    }
-
-]
+genresmatrix=pd.read_feather('./static/genresmatrix.feather')
+genresmatrix=genresmatrix.set_index("MovieID")
+movies=pd.read_feather('./static/movies.feather')
+movies=movies.set_index("MovieID")
+categories=pd.read_feather('./static/categories.feather')
+top=20
 
 def getBestByCategory(category):
-    rm=randrange(len(movies)+1)
-    print(rm)
-    return movies[:rm]
+    print(category)
+    topn=genresmatrix[category].sort_values(ascending=False)[:20]
+    topnlist=list(topn.index)
+    print(topnlist)
+    return json.loads(movies.loc[topnlist].to_json(orient='records'))
+
+def getCategories():
+    return json.loads(categories.to_json(orient='records'))

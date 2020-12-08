@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, jsonify
-from . import app
-from . import recommender
+from flask import Flask, jsonify, render_template, request
 
+from . import app, recommender
 
 
 @app.route('/api/v1/recommender/categories', methods=['GET'])

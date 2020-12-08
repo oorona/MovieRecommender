@@ -9,8 +9,9 @@
             "type": "python",
             "request": "launch",
             "module": "flask",
+            "cwd": "./recommenderapp",
             "env": {
-                "FLASK_APP": "recommenderapp.webapp",                
+                "FLASK_APP": "webapp",                
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },

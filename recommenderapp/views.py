@@ -1,33 +1,8 @@
-from flask import Flask, render_template,url_for,send_from_directory
 import requests
+from flask import Flask, render_template, request, send_from_directory, url_for
 
-from . import app
-from . import recommender
+from . import app, recommender
 
-
-movies = [
-    {
-        'title':"Toy Story",
-        'year':"1995",
-        'filename':"images/movies/1.jpg"
-    },
-    {
-        'title':"Jumanji",
-        'year':"1995",
-        'filename': "images/movies/2.jpg"
-    }
-]
-categories = [
-    {
-        'name':"Action"
-    },
-    {
-        'name':'Horror'
-    },
-    {   
-        'name':'Suspense'
-    }
-]
 
 @app.route("/")
 def home():
@@ -39,13 +14,12 @@ def about():
 
 @app.route("/genres/")
 def genres():
-    category="Action"   
-    movies=recommender.getBestByCategory(category)
+    categories=recommender.getCategories()
     return render_template("genres.html",categories=categories)
 
 @app.route("/results/")
 def results():
-    category="Action"   
+    category=request.args.get('category')  
     movies=recommender.getBestByCategory(category)
     return render_template("results.html",movies=movies)    
 
