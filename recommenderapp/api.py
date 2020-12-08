@@ -9,6 +9,6 @@ def api_categories():
         category = request.args['category']
         print(category)
     else:
-        return "Error: No id field provided. Please specify an id."
+        return "Error: No Category field provided. Please specify an Category."
 
     return jsonify(recommender.getBestByCategory(category))

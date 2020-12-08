@@ -1,0 +1,10 @@
+name: recommenderapp
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - flask
+  - pandas
+  - flask-wtf
+  - pyarrow
+  - gunicorn
