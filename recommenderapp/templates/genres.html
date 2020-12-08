@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<h1>List of Genres</h1>
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Categories
+    </button>
+    <div class="dropdown-menu" id="selectcat" aria-labelledby="btnGroupDrop1">
+      {% for category in categories %}
+          <a class="dropdown-item" value="{{ category.name }}">{{ category.name }}</a>                
+      {% endfor %}         
+    </div>
+  </div>
+</div>
+<div id="results" >
+</div>
+<div id="message">  
+</div>
+  
+<script>
+ $("#selectcat a").on('click', function(e) {
+  e.preventDefault(); // cancel the link behaviour
+  var selText = $(this).text();
+  url='{{ url_for("results") }}?category='+selText;
+  console.log(url);
+  $("#results").load(url);
+  
+});
+</script>
+{% endblock %}
