@@ -1,20 +1,29 @@
-.cover-container {
+.movie-container {
     height: 100%;
     width: 100%;
     white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
 }
-.cover-item {
+.movie-item {
     position: relative;
     display: inline-block;
     margin: 8px 8px;
     box-shadow: 4px 4px 8px #bbb;
     border-top-right-radius: 4px;
-    width: 185px;
-    height: 278px;
-    vertical-align: bottom;
     background-position: top left;
     background-repeat: no-repeat;
     background-size: cover;
+    float: left;
+    width: min-content;
+}
+
+.movie-text {
+    text-align: center;
+    font-size: 10px;
+}
+
+.movie-image {
+    height: 278px;
+    
 }

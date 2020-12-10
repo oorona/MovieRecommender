@@ -19,8 +19,10 @@ def genres():
 @app.route("/results/")
 def results():
     category=request.args.get('category')  
-    movies=recommender.getBestByCategory(category)
-    return render_template("results.html",movies=movies)    
+    topn=int(request.args.get('topn'))
+    movies=recommender.getBestByCategory(category,topn)
+    
+    return render_template("results.html",movies=movies,category=category)    
 
 @app.route("/recommendations/")
 def recommendations():

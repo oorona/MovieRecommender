@@ -1,11 +1,15 @@
 <div class="container-fluid">
-    <div class="col-lg-12 col-md-12 ">
-      <div class="cover-container" id="results">  
+  <h1> List of {{ category }} Movies</h1>
+      <div class="movie-container">  
         {% for movie in movies %}
-        <div class="cover-item" >      
+        <div class="movie-item" >
+          <div class=movie-text>
+                <p>{{ movie.Title }}</p>
+          </div>
+          <div class="movie-image">
                 <img src="{{ url_for('static', filename=movie.Filename)}}">
-          </div>          
+          </div>
+         </div>          
         {% endfor %}
       </div>
-    </div>
   </div>

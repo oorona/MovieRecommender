@@ -1,0 +1,15 @@
+name: dataanalysis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jupyter
+  - numpy
+  - requests
+  - pandas
+  - pyarrow
+  - feather-format 
+  - matplotlib
+  - jupyter_contrib_nbextensions
+  - scipy
+  - scikit-learn

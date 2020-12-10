@@ -14,9 +14,18 @@
           <a class="dropdown-item" value="{{ category.Category }}">{{ category.Category }}</a>                
       {% endfor %}         
     </div>
+    <div >
+      <div> 
+        <Strong>Selections</Strong>
+      </div>
+      <div class="text-left">
+        <input id="topn" class="border-0" type="range" min="5" max="50" value="5"/>     
+        <span id="topnsel">5</span>
+      </div>
+    </div>
   </div>
 </div>
-<div id="results" >
+<div id="results" class="container-fluid" >
 </div>
 <div id="message">  
 </div>
@@ -25,10 +34,16 @@
  $("#selectcat a").on('click', function(e) {
   e.preventDefault(); // cancel the link behaviour
   var selText = $(this).text();
-  url='{{ url_for("results") }}?category='+selText;
+  topn=document.getElementById("topn").value
+  url='{{ url_for("results") }}?category='+selText+'&'+"topn="+topn;
   console.log(url);
   $("#results").load(url);
   
 });
+</script>
+<script>
+  $("#topn").on('input',function(e){
+    document.getElementById("topnsel").innerHTML=this.value;
+  });
 </script>
 {% endblock %}
