@@ -31,7 +31,7 @@
                     <ul class="list-unstyled">
                        <li><a href="https://www.linkedin.com/in/oswaldoorona/" class="text-white">LinkedIn</a></li>                      
                       <li><a href="https://github.com/oorona" class="text-white">Github</a></li>
-                      <li><a href="mailto: abc@example.com"" class="text-white">Email</a></li>
+                      <li><a href="mailto: abc@example.com" class="text-white">Email</a></li>
                     </ul>
                   </div>
                 </div>
@@ -43,9 +43,9 @@
                   <strong>Recommender</strong>
                 </a>
                 <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
-                    <a class="nav-link" href="{{ url_for('genres') }}">Genres</a>
-                    <a class="nav-link" href="{{ url_for('recommendations') }}">Recommendation</a>
+                    <a class="nav-link text-white active" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-link text-white " href="{{ url_for('genres') }}">Genres</a>
+                    <a class="nav-link text-white" href="{{ url_for('recommendations') }}">Recommendation</a>
                 </nav>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
@@ -53,10 +53,13 @@
               </div>
             </div>
           </header>
-        <main  class="container-fluid">
-           
+        
+        <main  class="container-fluid">    
+          <div class="background-image"></div>
+          <div class="content">      
             {% block content %}
             {% endblock %}
+          </div>
             <footer>
                 <p>Recommender System Fall 2020</p>
             </footer>

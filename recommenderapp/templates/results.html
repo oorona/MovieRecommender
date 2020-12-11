@@ -1,15 +1,18 @@
-<div class="container-fluid">
-  <h1> List of {{ category }} Movies</h1>
+<div>
+  <h3> Best {{ category }} Movies</3>
       <div class="movie-container">  
         {% for movie in movies %}
-        <div class="movie-item" >
-          <div class=movie-text>
-                <p>{{ movie.Title }}</p>
-          </div>
+        <div class="movie-item rounded" >
+          <div class="movie-text-box">
+              <p class="movie-title"><span class="movie-span">{{ movie.Title }}</span></p>
+          </div>  
           <div class="movie-image">
                 <img src="{{ url_for('static', filename=movie.Filename)}}">
           </div>
-         </div>          
+          <div class="movie-text-box">
+            <p class="movie-year"><span>{{ movie.Year }}</span></p>
+          </div>
+        </div>          
         {% endfor %}
       </div>
-  </div>
+</div>

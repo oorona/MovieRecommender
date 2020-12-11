@@ -24,11 +24,33 @@ def results():
     
     return render_template("results.html",movies=movies,category=category)    
 
-@app.route("/recommendations/")
+@app.route("/recommendations/", methods=['GET', 'POST'])
 def recommendations():
-    return render_template("recommendations.html")
+    if request.method == 'POST':
+        print("Post received new")
+        print(len(request.args))
+        for i in request.args:
+            print(i)
+        return render_template("inputselections.html")   
+    else:
+        categories=recommender.getCategories()
+        return render_template("recommendations.html",categories=categories)
 
 @app.route("/api/data")
 def get_data():
     return app.send_static_file("data.json")
 
+@app.route("/listselection/")
+def listselection():
+    topn=int(request.args.get('topn'))
+    movies=recommender.getSelectionList(topn)    
+    return render_template("selectionlist.html",movies=movies)   
+
+@app.route("/inputselection/", methods=['GET', 'POST'])
+def inputselection():
+    if request.method == 'GET':
+        print("Post received")
+        print(len(request.args))
+        for i in request.args:
+            print(i+" "+request.args.get(i))
+    return render_template("inputselections.html")   

@@ -1,0 +1,41 @@
+<div>
+    <h3> Rate Movies </h3>
+    <form action="/inputselection" method="GET"> 
+        <div class="movie-container">  
+          {% for movie in movies %}
+          <div class="movie-item rounded" >
+            <div class="movie-text-box">
+                <p class="movie-title"><span class="movie-span">{{ movie.Title }}</span></p>
+            </div>  
+            <div class="movie-image">
+                  <img src="{{ url_for('static', filename=movie.Filename)}}">
+            </div>
+            <div class="movie-text-box">
+              <p class="movie-year"><span>{{ movie.Year }}</span></p>
+            </div>
+            <div> 
+                    <fieldset class="rating"> 
+                        <input type="radio" id="star5{{ movie.ID }}" name="rating{{ movie.ID }}" value="5" />
+                        <label class="full" for="star5{{ movie.ID }}" title="Excellent"></label> 
+                       
+                        <input type="radio" id="star4{{ movie.ID }}" name="rating{{ movie.ID }}" value="4" />
+                        <label class="full" for="star4{{ movie.ID }}" title="Good"></label> 
+                        
+                        <input type="radio" id="star3{{ movie.ID }}" name="rating{{ movie.ID }}" value="3" />
+                        <label class="full" for="star3{{ movie.ID }}" title="Ok"></label> 
+                        
+                        <input type="radio" id="star2{{ movie.ID }}" name="rating{{ movie.ID }}" value="2" />
+                        <label class="full" for="star2{{ movie.ID }}" title="Bad"></label> 
+                      
+                        <input type="radio" id="star1{{ movie.ID }}" name="rating{{ movie.ID }}" value="1" />
+                        <label class="full" for="star1{{ movie.ID }}" title="Awful"></label>       
+                    </fieldset>
+            </div>
+          </div>          
+          {% endfor %}
+        </div>
+        <button id="submitbutton" type="submit" class="btn btn-primary">
+            Submit 
+         </button>
+        </form>        
+  </div>

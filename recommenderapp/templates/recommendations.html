@@ -2,5 +2,40 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-<p>Rate Movies to get recommendations</p>
+<h1>List of Genres</h1>
+<div class="btn-group" role="group" >
+    <button id="btnGroupDrop1" type="button" class="btn btn-primary">
+      Start Rating
+    </button>
+    <div >
+      <div> 
+        <Strong> Number of Movies</Strong>
+      </div>
+      <div class="text-left">
+        <input id="topn" class="border-0" type="range" min="5" max="50" value="5"/>     
+        <span id="topnsel">5</span>
+      </div>
+    </div>
+</div>
+<div id="results" class="container-fluid" >
+</div>
+<div id="message">  
+</div>
+
+  
+<script>
+$("#btnGroupDrop1").on('click', function(e) {
+    e.preventDefault(); 
+    topn=document.getElementById("topn").value
+    console.log(topn);
+    url='{{ url_for("listselection") }}?topn='+topn;
+    console.log(url);
+    $("#results").load(url);  
+});
+</script>
+<script>
+  $("#topn").on('input',function(e){
+    document.getElementById("topnsel").innerHTML=this.value;
+  });
+</script>
 {% endblock %}
