@@ -8,17 +8,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 basedata="./recommenderapp/static/data"
 
-genresmatrix=pd.read_feather(os.path.join(basedata,'genresmatrix.feather'))
-genresmatrix=genresmatrix.set_index("MovieID")
+
 movies=pd.read_feather(os.path.join(basedata,'movies.feather'))
 movies["ID"]=movies.MovieID
 movies=movies.set_index("MovieID")
-categories=pd.read_feather(os.path.join(basedata,'categories.feather'))
 top=20
-ratings_movies=pd.read_feather(os.path.join(basedata,'utilitymatrix.feather'))
-ratings_movies=ratings_movies.set_index("MovieID")
 
-globalave=np.nanmean(ratings_movies)
+
 
 def getMapIdDictRows(df):
     mapiddict={}
@@ -28,17 +24,21 @@ def getMapIdDictRows(df):
         j+=1
     return mapiddict,df.shape[0]
 
-mapiddict,size=getMapIdDictRows(ratings_movies)
 
 def getBestByCategory(category,topn=20):
+    genresmatrix=pd.read_feather(os.path.join(basedata,'genresmatrix.feather'))
+    genresmatrix=genresmatrix.set_index("MovieID")    
     topn=genresmatrix[category].sort_values(ascending=False)[:topn]
     topnlist=list(topn.index)
     return json.loads(movies.loc[topnlist].to_json(orient='records'))
 
 def getCategories():
+    categories=pd.read_feather(os.path.join(basedata,'categories.feather'))
     return json.loads(categories.to_json(orient='records'))
 
 def getSelectionList(topn=20):
+    ratings_movies=pd.read_feather(os.path.join(basedata,'utilitymatrix.feather'))
+    ratings_movies=ratings_movies.set_index("MovieID")    
     selection=ratings_movies.sample(n=topn)
     ids=selection.index.to_numpy()
     print(ids)
@@ -64,8 +64,6 @@ def getRatingIBCF(utilityMatrix,similarityMatrix,rowid,colid,top,globalave,debug
     validcol=simcol[mask]
     
     sortedvalues=np.argsort(validrow)
-    if debug:
-        print(sortedvalues)
     topn=sortedvalues[-top:]
     dt=np.sum(validrow[topn])
     db=np.sum(np.abs(validcol[topn]))
@@ -125,9 +123,16 @@ def getUserPredictions(utilityMatrix,queryVector,size,k,globalave):
                 queryVector[i]=r
     return queryVector
 
+def getUtilityMatrix():
+    ratings_movies=pd.read_feather(os.path.join(basedata,'utilitymatrix.feather'))
+    ratings_movies=ratings_movies.set_index("MovieID")
+    globalave=np.nanmean(ratings_movies)
+    mapiddict,size=getMapIdDictRows(ratings_movies)
+    utilityMatrix=ratings_movies.to_numpy()
+    return utilityMatrix,mapiddict,size,globalave
 
 def getRecommendations(userQuery,topn,k):
-    utilityMatrix=ratings_movies.to_numpy()
+    utilityMatrix,mapiddict,size,globalave=getUtilityMatrix()
     print(userQuery)
     for i in userQuery:
         print(i,movies.loc[i]['Title'])
