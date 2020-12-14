@@ -35,6 +35,7 @@ $("#btnGroupDrop1").on('click', function(e) {
     e.preventDefault(); 
     topn=document.getElementById("topn").value
     console.log(topn);
+    $("#results").html("<h3>Finding Movies, please wait....</h3>")
     url='{{ url_for("listselection") }}?topn='+topn;
     console.log(url);
     $("#results").load(url);  
@@ -49,6 +50,7 @@ $("#btnGroupDrop1").on('click', function(e) {
 <script>
     $("#submitbutton").on('click', function(e) {
     e.preventDefault(); // cancel the link behaviour
+    $("#results").html("<h3>Calculating preferences, please wait...</h3>")
     url='{{ url_for("inputselection") }}'
     console.log('url')
     console.log($("#selectionform").serialize());
