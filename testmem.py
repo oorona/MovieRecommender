@@ -11,5 +11,11 @@ def memory_usage_psutil(pid):
     return mem
 
 if __name__ == "__main__":
-    print(memory_usage_psutil(int(sys.argv[1])))
+    if len(sys.argv) ==1:
+        for line in sys.stdin:
+            pid=int(line)
+    else:
+        pid=int(sys.argv[1])
+
+    print(memory_usage_psutil(pid))
 
