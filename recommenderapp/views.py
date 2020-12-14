@@ -27,8 +27,8 @@ def results():
 @app.route("/recommendations/", methods=['GET', 'POST'])
 def recommendations():
     if request.method == 'POST':
-        print("Post received new")
-        print(len(request.args))
+        #print("Post received new")
+        #print(len(request.args))
         for i in request.args:
             print(i)
         return render_template("inputselections.html")   
@@ -47,10 +47,16 @@ def listselection():
     return render_template("selectionlist.html",movies=movies)   
 
 @app.route("/inputselection/", methods=['GET', 'POST'])
-def inputselection():
+def inputselection():    
+    topn=10
+    k=30
     if request.method == 'GET':
-        print("Post received")
-        print(len(request.args))
+        moviequery={}
+        #print("Post received")
+        #print(len(request.args))
         for i in request.args:
-            print(i+" "+request.args.get(i))
-    return render_template("inputselections.html")   
+            #print(i+" "+request.args.get(i))
+            moviequery[int(i[6:])]=int(request.args.get(i))
+    #print(moviequery)
+    movies=recommender.getRecommendations(moviequery,topn,k)    
+    return render_template("resultsr.html",movies=movies)   

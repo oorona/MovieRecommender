@@ -8,3 +8,6 @@ dependencies:
   - flask-wtf
   - pyarrow
   - gunicorn
+  - scipy
+  - scikit-learn
+  - numpy

@@ -12,13 +12,20 @@
         <Strong> Number of Movies</Strong>
       </div>
       <div class="text-left">
-        <input id="topn" class="border-0" type="range" min="5" max="50" value="5"/>     
-        <span id="topnsel">5</span>
+        <input id="topn" class="border-0" type="range" min="20" max="50" value="5"/>     
+        <span id="topnsel">20</span>
       </div>
     </div>
 </div>
+<form id="selectionform" action="/inputselection" method="GET"> 
+
 <div id="results" class="container-fluid" >
 </div>
+<button id="submitbutton" class="btn btn-primary" action="submit">
+  Submit 
+</button> 
+</form>      
+
 <div id="message">  
 </div>
 
@@ -38,4 +45,15 @@ $("#btnGroupDrop1").on('click', function(e) {
     document.getElementById("topnsel").innerHTML=this.value;
   });
 </script>
+
+<script>
+    $("#submitbutton").on('click', function(e) {
+    e.preventDefault(); // cancel the link behaviour
+    url='{{ url_for("inputselection") }}'
+    console.log('url')
+    console.log($("#selectionform").serialize());
+    $("#results").load(url,$("#selectionform").serialize());  
+
+  });
+ </script>
 {% endblock %}

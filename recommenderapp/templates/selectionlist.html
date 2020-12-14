@@ -1,6 +1,5 @@
 <div>
     <h3> Rate Movies </h3>
-    <form action="/inputselection" method="GET"> 
         <div class="movie-container">  
           {% for movie in movies %}
           <div class="movie-item rounded" >
@@ -33,9 +32,5 @@
             </div>
           </div>          
           {% endfor %}
-        </div>
-        <button id="submitbutton" type="submit" class="btn btn-primary">
-            Submit 
-         </button>
-        </form>        
+        </div> 
   </div>
