@@ -17,7 +17,7 @@ categories=pd.read_feather(os.path.join(basedata,'categories.feather'))
 top=20
 ratings_movies=pd.read_feather(os.path.join(basedata,'utilitymatrix.feather'))
 ratings_movies=ratings_movies.set_index("MovieID")
-utilityMatrix=ratings_movies.to_numpy()
+
 globalave=np.nanmean(ratings_movies)
 
 def getMapIdDictRows(df):
@@ -51,7 +51,7 @@ def getSelectionList(topn=20):
 
 
 def getRatingIBCF(utilityMatrix,similarityMatrix,rowid,colid,top,globalave,debug=False):
-    row=similarityMatrix[rowid]
+    row=similarityMatrix[rowid]    
     aveuser=np.nanmean(utilityMatrix[:,colid])
     col=utilityMatrix[:,colid]-aveuser
     mask=~np.isnan(col)
@@ -127,6 +127,7 @@ def getUserPredictions(utilityMatrix,queryVector,size,k,globalave):
 
 
 def getRecommendations(userQuery,topn,k):
+    utilityMatrix=ratings_movies.to_numpy()
     print(userQuery)
     for i in userQuery:
         print(i,movies.loc[i]['Title'])
