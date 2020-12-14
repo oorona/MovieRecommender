@@ -1,3 +1,1 @@
-export FLASK_APP=recommenderapp.webapp
-python -m flask run
-
+gunicorn -b localhost:8000 recommenderapp.webapp:app
