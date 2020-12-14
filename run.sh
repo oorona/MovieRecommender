@@ -1,1 +1,1 @@
-gunicorn -b localhost:8000 recommenderapp.webapp:app
+gunicorn -b 192.168.1.104:8000 recommenderapp.webapp:app
