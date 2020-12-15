@@ -49,7 +49,7 @@ def listselection():
 @app.route("/inputselection/", methods=['GET', 'POST'])
 def inputselection():    
     topn=10
-    k=30
+    k=15
     if request.method == 'GET':
         moviequery={}
         #print("Post received")
