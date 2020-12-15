@@ -12,8 +12,8 @@
         <Strong> Number of Movies</Strong>
       </div>
       <div class="text-left">
-        <input id="topn" class="border-0" type="range" min="20" max="50" value="5"/>     
-        <span id="topnsel">20</span>
+        <input id="topn" class="border-0" type="range" min="10" max="50" value="5"/>     
+        <span id="topnsel">10</span>
       </div>
     </div>
 </div>
@@ -35,7 +35,7 @@ $("#btnGroupDrop1").on('click', function(e) {
     e.preventDefault(); 
     topn=document.getElementById("topn").value
     console.log(topn);
-    $("#results").html("<h3>Finding Movies, please wait....</h3>")
+    $("#results").html("<h3>Finding Movies, please wait....</h3>");
     url='{{ url_for("listselection") }}?topn='+topn;
     console.log(url);
     $("#results").load(url);  
@@ -49,13 +49,13 @@ $("#btnGroupDrop1").on('click', function(e) {
 
 <script>
     $("#submitbutton").on('click', function(e) {
-    e.preventDefault(); // cancel the link behaviour
-    $("#results").html("<h3>Calculating preferences, please wait...</h3>")
+    e.preventDefault(); // cancel the link behaviour    
     url='{{ url_for("inputselection") }}'
-    console.log('url')
-    console.log($("#selectionform").serialize());
-    $("#results").load(url,$("#selectionform").serialize());  
-
+    console.log('url');
+    param=$("#selectionform").serialize();
+    console.log(param);
+    $("#results").html("<h3>Finding Movies, please wait....</h3>");
+    $("#results").load(url,param);  
   });
  </script>
 {% endblock %}

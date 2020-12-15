@@ -92,7 +92,9 @@ def getUserPredictions(queryVector,k):
     for i in range(len(queryVector)):        
         if np.isnan(queryVector[i]):
                 vectorSimilarity=similarityMatrix[i]
+                #print(vectorSimilarity)
                 r=getRatingIBCF(queryVector,vectorSimilarity,k,debug=False)
+                #print(r)
                 queryVector[i]=r
     return queryVector   
 
@@ -132,7 +134,6 @@ def getRecommendations(userQuery,topn,k):
     for i in userQuery:
         print(i,movies.loc[i]['Title'])
     queryVector=getUserQueryVector(userQuery)
-    print (queryVector)
 
     #queryVector=getUserPredictions(utilityMatrix,queryVector,k)       
     queryVector=getUserPredictions(queryVector,k)   
