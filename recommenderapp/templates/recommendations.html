@@ -2,7 +2,7 @@
 {% block title %}
 {% endblock %}
 {% block content %}
-<h1>List of Genres</h1>
+<h3>Recommendations based on preferences</h3>
 <div class="btn-group" role="group" >
     <button id="btnGroupDrop1" type="button" class="btn btn-primary">
       Start Rating
@@ -18,14 +18,13 @@
     </div>
 </div>
 <form id="selectionform" action="/inputselection" method="GET"> 
-
+  <button id="submitbutton" class="btn btn-primary" action="submit">
+    Done Rating 
+  </button>
 <div id="results" class="container-fluid" >
-</div>
-<button id="submitbutton" class="btn btn-primary" action="submit">
-  Submit 
-</button> 
+ 
 </form>      
-
+</div>
 <div id="message">  
 </div>
 

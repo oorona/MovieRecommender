@@ -1,3 +1,5 @@
+#btnGroupDrop1 {background-color: dodgerblue}
+#submitbutton {background-color: dodgerblue}
 .movie-container {
     height: 80vh;
     width: 100%;
@@ -20,8 +22,8 @@
     word-wrap: break-word;
     hyphens: auto;
     text-align: center;
-    line-height: 100px;
-    height: 75px;
+    line-height: 50px;
+    height: 50px;
 }
 
 .movie-year {
@@ -40,6 +42,7 @@
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    color: black;
 }
 
 
